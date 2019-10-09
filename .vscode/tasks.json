@@ -1,0 +1,69 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build",
+            "type": "shell",
+            "command": "docker",
+            "args": [
+                "build",
+                "-t",
+                "docker-developer-nifi",
+                "."
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run Container w/ Volume",
+            "type": "shell",
+            "command": "docker",
+            "args": [
+                "run",
+                "-it",
+                "-p",
+                "8080",
+                "-v",
+                "/flow_conf:/opt/nifi/nifi-current/flow_conf",
+                "--rm",
+                "--name",
+                "docker-developer-nifi",
+                "docker-developer-nifi",
+            ],
+            "problemMatcher": [],
+            "dependsOn":["Build"]
+        },
+        {
+            "label": "Run Container w/o Volume",
+            "type": "shell",
+            "command": "docker",
+            "args": [
+                "run",
+                "-it",
+                "-p",
+                "8080",
+                "--rm",
+                "--name",
+                "docker-developer-nifi",
+                "docker-developer-nifi",
+            ],
+            "problemMatcher": [],
+            "dependsOn":["Build"]
+        },
+        {
+            "label": "Stop Container",
+            "type": "shell",
+            "command": "docker",
+            "args": [
+                "stop",
+                "docker-developer-nifi"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}

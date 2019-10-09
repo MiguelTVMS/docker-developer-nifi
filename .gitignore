@@ -14,3 +14,8 @@
 .history
 
 # End of https://www.gitignore.io/api/visualstudiocode
+
+# Removal of NIFI Flow Files
+
+flow_conf/*
+!flow_conf/.gitkeep
